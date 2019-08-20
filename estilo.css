@@ -1,132 +1,167 @@
-body {
-  background-color:#eee;
-  text-align:center;
-  padding:85px 0;
+
+
+
+
+
+
+
+/* Switch starts here */
+.rocker {
+  display: inline-block;
+  position: relative;
+  /*
+  SIZE OF SWITCH
+  ==============
+  All sizes are in em - therefore
+  changing the font-size here
+  will change the size of the switch.
+  See .rocker-small below as example.
+  */
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: #888;
+  width: 7em;
+  height: 4em;
+  overflow: hidden;
+  border-bottom: 0.5em solid #eee;
 }
 
-.toggle {
-  position:relative;
-  display:inline-block;
-  width:40px;
-  height:60px;
-  background-color:#bbb;
-  -webkit-border-radius:4px;
-  -moz-border-radius:4px;
-  border-radius:4px;
-  text-align:center;
+.rocker-small {
+  font-size: 0.65em; /* Sizes the switch */
+  margin: 1em;
 }
 
-.toggle input {
-  width:100%;
-  height:100%;
-  margin:0 0;
-  padding:0 0;
-  position:absolute;
-  top:0;
-  right:0;
-  bottom:0;
-  left:0;
-  z-index:2;
-  cursor:pointer;
-  opacity:0;
-  filter:alpha(opacity=0);
+.rocker::before {
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #999;
+  border: 0.5em solid #eee;
+  border-bottom: 0;
 }
 
-.toggle label {
-  display:block;
-  position:absolute;
-  top:1px;
-  right:1px;
-  bottom:1px;
-  left:1px;
-  background-image:-webkit-linear-gradient(top,#fff 0%,#ddd 50%,#fff 50%,#eee 100%);
-  background-image:-moz-linear-gradient(top,#fff 0%,#ddd 50%,#fff 50%,#eee 100%);
-  background-image:-ms-linear-gradient(top,#fff 0%,#ddd 50%,#fff 50%,#eee 100%);
-  background-image:-o-linear-gradient(top,#fff 0%,#ddd 50%,#fff 50%,#eee 100%);
-  background-image:linear-gradient(top,#fff 0%,#ddd 50%,#fff 50%,#eee 100%);
-  -webkit-box-shadow:0 2px 3px rgba(0,0,0,0.4),
-    inset 0 -1px 1px #888,
-    inset 0 -5px 1px #bbb,
-    inset 0 -6px 0 white;
-  -moz-box-shadow:0 2px 3px rgba(0,0,0,0.4),
-    inset 0 -1px 1px #888,
-    inset 0 -5px 1px #bbb,
-    inset 0 -6px 0 white;
-  box-shadow:0 2px 3px rgba(0,0,0,0.4),
-    inset 0 -1px 1px #888,
-    inset 0 -5px 1px #bbb,
-    inset 0 -6px 0 white;
-  -webkit-border-radius:3px;
-  -moz-border-radius:3px;
-  border-radius:3px;
-  font:normal 11px Arial,Sans-Serif;
-  color:#666;
-  text-shadow:0 1px 0 white;
-  cursor:text;
+.rocker input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.toggle label:before {
-  content:attr(data-off);
-  position:absolute;
-  top:6px;
-  right:0;
-  left:0;
-  z-index:4;
+.switch-left,
+.switch-right {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5em;
+  width: 3em;
+  transition: 0.2s;
 }
 
-.toggle label:after {
-  content:attr(data-on);
-  position:absolute;
-  right:0;
-  bottom:11px;
-  left:0;
-  color:#666;
-  text-shadow:0 -1px 0 #eee;
+.switch-left {
+  height: 2.4em;
+  width: 2.75em;
+  left: 0.85em;
+  bottom: 0.4em;
+  background-color: #ddd;  
+  transform: rotate(15deg) skewX(15deg);
 }
 
-.toggle input:checked + label {
-  background-image:-webkit-linear-gradient(top,#eee 0%,#ccc 50%,#fff 50%,#eee 100%);
-  background-image:-moz-linear-gradient(top,#eee 0%,#ccc 50%,#fff 50%,#eee 100%);
-  background-image:-ms-linear-gradient(top,#eee 0%,#ccc 50%,#fff 50%,#eee 100%);
-  background-image:-o-linear-gradient(top,#eee 0%,#ccc 50%,#fff 50%,#eee 100%);
-  background-image:linear-gradient(top,#eee 0%,#ccc 50%,#fff 50%,#eee 100%);
-  -webkit-box-shadow:0 0 1px rgba(0,0,0,0.4),
-    inset 0 1px 7px -1px #ccc,
-    inset 0 5px 1px #fafafa,
-    inset 0 6px 0 white;
-  -moz-box-shadow:0 0 1px rgba(0,0,0,0.4),
-    inset 0 1px 7px -1px #ccc,
-    inset 0 5px 1px #fafafa,
-    inset 0 6px 0 white;
-  box-shadow:0 0 1px rgba(0,0,0,0.4),
-    inset 0 1px 7px -1px #ccc,
-    inset 0 5px 1px #fafafa,
-    inset 0 6px 0 white;
+.switch-right {
+  right: 0.5em;
+  bottom: 0;
+/* background-color: #bd5757; */ 
+  background-color: #ddd;
+  color: #ccc;
+  }
+
+.switch-left::before,
+.switch-right::before {
+  content: "";
+  position: absolute;
+  width: 0.4em;
+  height: 2.45em;
+  bottom: -0.45em;
+  background-color: #ccc;
+  transform: skewY(-65deg);
 }
 
-.toggle input:checked:hover + label {
-  -webkit-box-shadow:0 1px 3px rgba(0,0,0,0.4),
-    inset 0 1px 7px -1px #ccc,
-    inset 0 5px 1px #fafafa,
-    inset 0 6px 0 white;
-  -moz-box-shadow:0 1px 3px rgba(0,0,0,0.4),
-    inset 0 1px 7px -1px #ccc,
-    inset 0 5px 1px #fafafa,
-    inset 0 6px 0 white;
-  box-shadow:0 1px 3px rgba(0,0,0,0.4),
-    inset 0 1px 7px -1px #ccc,
-    inset 0 5px 1px #fafafa,
-    inset 0 6px 0 white;
+.switch-left::before {
+  left: -0.4em;
 }
 
-.toggle input:checked + label:before {
-  z-index:1;
-  top:11px;
+.switch-right::before {
+  right: -0.375em;
+  background-color: transparent;
+  transform: skewY(65deg);
 }
 
-.toggle input:checked + label:after {
-  bottom:9px;
-  color:#aaa;
-  text-shadow:none;
-  z-index:4;
+input:checked + .switch-left {
+  /* background-color: #0084d0; */  
+  color: limegreen;
+  bottom: 0px;
+  left: 0.5em;
+  height: 2.5em;
+  width: 3em;
+  transform: rotate(0deg) skewX(0deg);  
+}
+
+input:checked + .switch-left::before {
+  background-color: transparent;
+  width: 3.0833em;
+}
+
+input:checked + .switch-left + .switch-right {
+  background-color: #ddd;
+  color: #888;
+  bottom: 0.4em;
+  right: 0.8em;
+  height: 2.4em;
+  width: 2.75em;
+  transform: rotate(-15deg) skewX(-15deg);
+}
+
+
+input:checked + .switch-left + .switch-right::before {
+  background-color: #ccc;
+}
+
+
+/* Keyboard Users */
+input:focus + .switch-left {
+  color: #333;
+}
+
+input:checked:focus + .switch-left {
+  color: limegreen;
+}
+
+input:focus + .switch-left + .switch-right {
+  color: #fff;
+
+}
+
+input:checked:focus + .switch-left + .switch-right {
+  color: #333;
+}
+
+
+
+.badge {
+  position: relative;
+  top: 16px;
+  right: 1px;
+  padding: 4px 4px;
+  border-radius: 50%;
+  background-color: red;
+  color: black;
+  /* transform: skewX(-15deg);*/
+  width: 10px;
+  height: 10px;
+  background-image:  url("http://i.stack.imgur.com/e2S63.png");
 }
