@@ -1,10 +1,5 @@
-//var ip  = "http://192.168.0.12";
-var ip = "/painelInterno";
-
-
-
-var paginaDeDados = ip + "/lerDados"
-var pagLigaLed = ip + "/ligarLed";
+var paginaDeDados = "lerDados"
+var pagLigaLed = "ligarLed";
 
 	
 // carrega primeira vez e configura página para recarregar automaticamente a cada 20s
@@ -17,40 +12,74 @@ $(document).ready(function(){
 function limpaECarregaTabela(){
 	$.ajax({url: paginaDeDados , success: function(result){
 		$("#interruptoresRow").html("");
+		$("#temperaturaRow").html("");
+		$("#pressaoRow").html("");
 		insereLinhas(result);
 	}, cache: false});
 }
 
 
 function insereLinhas(result){
+	
 	var pagina = JSON.parse(result);
 	var qtd = pagina.Dispo.length; 
 	
 	for(var numLinha=0; numLinha<qtd; numLinha++){
-		
-			var txtLinha  = '<div class="col-xs-">';
-			
-			// LED
-		  	txtLinha += `<label id=tdBotao_${numLinha} class="rocker rocker-small">`;
-		  	txtLinha += '<input type="checkbox"';
-		  	
-		  	if(pagina.Dispo[numLinha].LED == '1') 
-				txtLinha += ' checked=true ';
-	        txtLinha += `onclick="muda(this.id,${pagina.Dispo[numLinha].SEQ})"`; 
-		  			  	
-		  	txtLinha += '><span class="switch-left">I</span>';
-		  	txtLinha += '<span class="switch-right">O</span>';
-		  	txtLinha += '</label>';
-
-		  	// Local
-			txtLinha += `<div class="text-center small" id=pLocal_${numLinha}>` + pagina.Dispo[numLinha].LOCAL + '</div>'; 
-		  	
-			txtLinha += '</div>';
-			
-		$("#interruptoresRow").append(txtLinha);
-	
+			if (pagina.Dispo[numLinha].LED != '-') 
+				$("#interruptoresRow").append(insereInterruptor(pagina.Dispo[numLinha]));
+			if (pagina.Dispo[numLinha].ADC1 != '-')
+				 $("#temperaturaRow").append(insereInfoTemperatura(pagina.Dispo[numLinha]));
+			if (pagina.Dispo[numLinha].ADC2 != '-')
+				$("#pressaoRow").append(insereInfoPressao(pagina.Dispo[numLinha]));
   }
+}
+
+
+function insereInterruptor(dados){
 	
+	var txtInterruptor = '<div class="col-xs-">';
+	// LED
+	txtInterruptor += `<label id=tdBotao_${dados.SEQ} class="rocker rocker-small">`;
+	txtInterruptor += '<input type="checkbox"';
+  	if(dados.LED == '1') 
+  		txtInterruptor += ' checked=true ';
+  	txtInterruptor += `onclick="muda(this.id,${dados.SEQ})"`; 
+  	txtInterruptor += '><span class="switch-left">I</span>';
+  	txtInterruptor += '<span class="switch-right">O</span>';
+  	txtInterruptor += '</label>';
+  	// Local
+  	txtInterruptor += `<div class="text-center small" id=pLocal_${dados.SEQ}>` + dados.LOCAL + '</div>'; 
+  	txtInterruptor += '</div>';
+	return txtInterruptor;
+	
+}
+
+function insereInfoTemperatura(dados){
+	var txtInfoTemperatura  = '<div class="col-xs-">';
+	txtInfoTemperatura += `<label id=tdBotao_${dados.SEQ} class="rocker rocker-small">`;
+	txtInfoTemperatura += '<input type="checkbox"';
+  	txtInfoTemperatura += `onclick="muda(this.id,${dados.SEQ})"`; 
+  	txtInfoTemperatura += '><span class="switch-left">I</span>';
+  	txtInfoTemperatura += '<span class="switch-right">O</span>';
+  	txtInfoTemperatura += '</label>';
+  	// Local
+  	txtInfoTemperatura += `<div class="text-center small" id=pLocal_${dados.SEQ}>` + dados.LOCAL + '</div>'; 
+  	txtInfoTemperatura += '</div>';
+	return txtInfoTemperatura;	
+}
+
+function insereInfoPressao(dados){
+	var txtInfoPressao  = '<div class="col-xs-">';
+	txtInfoPressao += `<label id=tdBotao_${dados.SEQ} class="rocker rocker-small">`;
+	txtInfoPressao += '<input type="checkbox"';
+  	txtInfoPressao += `onclick="muda(this.id,${dados.SEQ})"`; 
+  	txtInfoPressao += '><span class="switch-left">I</span>';
+  	txtInfoPressao += '<span class="switch-right">O</span>';
+  	txtInfoPressao += '</label>';
+  	// Local
+  	txtInfoPressao += `<div class="text-center small" id=pLocal_${dados.SEQ}>` + dados.LOCAL + '</div>'; 
+  	txtInfoPressao += '</div>';
+	return txtInfoPressao;
 }
 
 // Usa AJAX pra só recarregar o botão que mudou, e recarrega a página novamente em alguns segundos
