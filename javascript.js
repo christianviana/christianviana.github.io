@@ -36,9 +36,9 @@ function insereLinhas(result){
 
 function criaInterruptor(dispo){
 	
-	var txtInterruptor = '<div class="col-xs-">';
+	var txtInterruptor = '<div class="col-xs- text-center">';
 	// LED
-	txtInterruptor += '<row>';
+	
 	txtInterruptor += `<label id=ESP_${dispo.SEQ} class="rocker rocker-small">`;
 	txtInterruptor += '<input type="checkbox"';
   	if(dispo.LED == '1') 
@@ -47,46 +47,48 @@ function criaInterruptor(dispo){
   	txtInterruptor += '><span class="switch-left">I</span>';
   	txtInterruptor += '<span class="switch-right">O</span>';
   	txtInterruptor += '</label>';
-  	txtInterruptor += '</row>';  	
+  		
   	// Local
-  	txtInterruptor += '<row>';
-  	txtInterruptor += `<p class="text-center small" id=pLocal_${dispo.SEQ}>` + dispo.LOCAL + '</p>'; 
-  	txtInterruptor += '</row>';
+  	
+  	txtInterruptor += '<br>';
+  	txtInterruptor += `<span class="text-center small" id=pLocal_${dispo.SEQ}>` + dispo.LOCAL + '</span>'; 
+  	
   	txtInterruptor += '</div>';
 	return txtInterruptor;
 	
 }
 
 function criaInfoTemperatura(dispo){
-	var txtInfoTemperatura  = '<div class="col-xs-">';
+	var txtInfoTemperatura  = '<div class="col-xs- text-center">';
 	
-	txtInfoTemperatura += '<row>';
-	txtInfoTemperatura += '<i class="fas fa-thermometer-full"></i>';
+	
+	txtInfoTemperatura += '<i class="fas fa-thermometer-full fa-2x"></i>';
 	txtInfoTemperatura += `<label id=ESP_${dispo.SEQ}>`;
 	txtInfoTemperatura += `${dispo.ADC1}`;
 	txtInfoTemperatura += '</label>';
 	
-	txtInfoTemperatura += '</row>';
+	
 	// Local
-	txtInfoTemperatura += '<row>';
-  	txtInfoTemperatura += `<p class="text-center small" id=pLocal_${dispo.SEQ}>` + dispo.LOCAL + '</p>'; 
-  	txtInfoTemperatura += '</row>';
+	txtInfoTemperatura += '<br>';
+  	txtInfoTemperatura += `<span class="text-center small" id=pLocal_${dispo.SEQ}>` + dispo.LOCAL + ' </span>'; 
+  	
   	txtInfoTemperatura += '</div>';
 	return txtInfoTemperatura;	
 }
 
 function criaInfoPressao(dispo){
-	var txtInfoPressao  = '<div class="col-xs-">';
-	txtInfoPressao += '<row>'
-	txtInfoPressao += '<i class="fas fa-tachometer-alt"></i>';;
+	var txtInfoPressao  = '<div class="col-xs- text-center">';
+	
+	txtInfoPressao += '<i class="fas fa-tachometer-alt fa-2x"></i>';;
 	txtInfoPressao += `<label id=ESP_${dispo.SEQ}>`;
 	txtInfoPressao += `${dispo.ADC2}`;
+	txtInfoPressao += '  	';
 	txtInfoPressao += '</label>';
-	txtInfoPressao += '</row>';	
+	
 	// Local
-	txtInfoPressao += '<row>';
-	txtInfoPressao += `<p class="text-center small" id=pLocal_${dispo.SEQ}>` + dispo.LOCAL + '</p>';
-	txtInfoPressao += '</row>';
+	txtInfoPressao += '<br>';
+	txtInfoPressao += `<span class="text-center small" id=pLocal_${dispo.SEQ}>` + dispo.LOCAL + ' </span>';
+	
 	txtInfoPressao += '</div>';
 	return txtInfoPressao;	
 }
