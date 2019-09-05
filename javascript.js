@@ -1,4 +1,4 @@
-var paginaDeDados = "lerDados"
+var paginaDeDados = "lerDados";
 var pagLigaLed = "ligarLed";
 
 	
@@ -26,61 +26,71 @@ function insereLinhas(result){
 	
 	for(var numLinha=0; numLinha<qtd; numLinha++){
 			if (pagina.Dispo[numLinha].LED != '-') 
-				$("#interruptoresRow").append(insereInterruptor(pagina.Dispo[numLinha]));
+				$("#interruptoresRow").append(criaInterruptor(pagina.Dispo[numLinha]));
 			if (pagina.Dispo[numLinha].ADC1 != '-')
-				 $("#temperaturaRow").append(insereInfoTemperatura(pagina.Dispo[numLinha]));
+				 $("#temperaturaRow").append(criaInfoTemperatura(pagina.Dispo[numLinha]));
 			if (pagina.Dispo[numLinha].ADC2 != '-')
-				$("#pressaoRow").append(insereInfoPressao(pagina.Dispo[numLinha]));
+				$("#pressaoRow").append(criaInfoPressao(pagina.Dispo[numLinha]));
   }
 }
 
-
-function insereInterruptor(dados){
+function criaInterruptor(dispo){
 	
 	var txtInterruptor = '<div class="col-xs-">';
 	// LED
-	txtInterruptor += `<label id=tdBotao_${dados.SEQ} class="rocker rocker-small">`;
+	txtInterruptor += '<row>';
+	txtInterruptor += `<label id=ESP_${dispo.SEQ} class="rocker rocker-small">`;
 	txtInterruptor += '<input type="checkbox"';
-  	if(dados.LED == '1') 
+  	if(dispo.LED == '1') 
   		txtInterruptor += ' checked=true ';
-  	txtInterruptor += `onclick="muda(this.id,${dados.SEQ})"`; 
+  	txtInterruptor += `onclick="muda(this.id,${dispo.SEQ})"`; 
   	txtInterruptor += '><span class="switch-left">I</span>';
   	txtInterruptor += '<span class="switch-right">O</span>';
   	txtInterruptor += '</label>';
+  	txtInterruptor += '</row>';  	
   	// Local
-  	txtInterruptor += `<div class="text-center small" id=pLocal_${dados.SEQ}>` + dados.LOCAL + '</div>'; 
+  	txtInterruptor += '<row>';
+  	txtInterruptor += `<p class="text-center small" id=pLocal_${dispo.SEQ}>` + dispo.LOCAL + '</p>'; 
+  	txtInterruptor += '</row>';
   	txtInterruptor += '</div>';
 	return txtInterruptor;
 	
 }
 
-function insereInfoTemperatura(dados){
+function criaInfoTemperatura(dispo){
 	var txtInfoTemperatura  = '<div class="col-xs-">';
-	txtInfoTemperatura += `<label id=tdBotao_${dados.SEQ} class="rocker rocker-small">`;
-	txtInfoTemperatura += '<input type="checkbox"';
-  	txtInfoTemperatura += `onclick="muda(this.id,${dados.SEQ})"`; 
-  	txtInfoTemperatura += '><span class="switch-left">I</span>';
-  	txtInfoTemperatura += '<span class="switch-right">O</span>';
-  	txtInfoTemperatura += '</label>';
-  	// Local
-  	txtInfoTemperatura += `<div class="text-center small" id=pLocal_${dados.SEQ}>` + dados.LOCAL + '</div>'; 
+	
+	txtInfoTemperatura += '<row>';
+	txtInfoTemperatura += '<i class="fas fa-thermometer-full"></i>';
+	txtInfoTemperatura += `<label id=ESP_${dispo.SEQ}>`;
+	txtInfoTemperatura += `${dispo.ADC1}`;
+	txtInfoTemperatura += '</label>';
+	
+	txtInfoTemperatura += '</row>';
+	// Local
+	txtInfoTemperatura += '<row>';
+  	txtInfoTemperatura += `<p class="text-center small" id=pLocal_${dispo.SEQ}>` + dispo.LOCAL + '</p>'; 
+  	txtInfoTemperatura += '</row>';
   	txtInfoTemperatura += '</div>';
 	return txtInfoTemperatura;	
 }
 
-function insereInfoPressao(dados){
+function criaInfoPressao(dispo){
 	var txtInfoPressao  = '<div class="col-xs-">';
-	txtInfoPressao += `<label id=tdBotao_${dados.SEQ} class="rocker rocker-small">`;
-	txtInfoPressao += '<input type="checkbox"';
-  	txtInfoPressao += `onclick="muda(this.id,${dados.SEQ})"`; 
-  	txtInfoPressao += '><span class="switch-left">I</span>';
-  	txtInfoPressao += '<span class="switch-right">O</span>';
-  	txtInfoPressao += '</label>';
-  	// Local
-  	txtInfoPressao += `<div class="text-center small" id=pLocal_${dados.SEQ}>` + dados.LOCAL + '</div>'; 
-  	txtInfoPressao += '</div>';
-	return txtInfoPressao;
+	txtInfoPressao += '<row>'
+	txtInfoPressao += '<i class="fas fa-tachometer-alt"></i>';;
+	txtInfoPressao += `<label id=ESP_${dispo.SEQ}>`;
+	txtInfoPressao += `${dispo.ADC2}`;
+	txtInfoPressao += '</label>';
+	txtInfoPressao += '</row>';	
+	// Local
+	txtInfoPressao += '<row>';
+	txtInfoPressao += `<p class="text-center small" id=pLocal_${dispo.SEQ}>` + dispo.LOCAL + '</p>';
+	txtInfoPressao += '</row>';
+	txtInfoPressao += '</div>';
+	return txtInfoPressao;	
 }
+
 
 // Usa AJAX pra só recarregar o botão que mudou, e recarrega a página novamente em alguns segundos
 function muda(response,sequencia){
@@ -97,6 +107,5 @@ function muda(response,sequencia){
 	// Após ajustar o estado do LED, setta a página para recarregar em 1,5s, 
 	// para buscar novamente o estado do botão LED do servidor
 	// Este tempo pode ser necessário para que o estado se modifique no dispositivo remoto
-	setTimeout(function(){limpaECarregaTabela();}, 1500);
-		
+	setTimeout(function(){limpaECarregaTabela();}, 1500);		
 }
