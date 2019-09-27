@@ -1,5 +1,5 @@
 .titulo {
-	padding:10px;
+	padding-top:10px;
 }
 
 .painel {
@@ -9,11 +9,11 @@
 
 .linha {
   text-align: center;
-  padding-left: 30px;
+  padding-left: 40px;
 }
 
 .icone {
-  padding-right: 20px;
+  padding-right: 30px;
   font-size: small;
   padding-top: 10px;
 }
