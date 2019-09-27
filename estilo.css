@@ -9,17 +9,20 @@
 
 .linha {
   text-align: center;
-  padding-left: 45px;
+  padding-left: 25px;
 }
 
 .icone {
-  padding-right: 30px;
+  padding-right: 35px;
+  padding-left: 35px;
   font-size: small;
   padding-top: 10px;
+  font-weight:bold;
 }
 
 .rotulo {
   padding-top: 5px;
+  font-weight:lighter;
 }
 
 
