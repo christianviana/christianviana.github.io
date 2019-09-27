@@ -25,6 +25,15 @@
   font-weight:lighter;
 }
 
+.botao {
+	border-radius: 8px;
+	width: 70px;
+}
+
+.ledLigado {
+	color: yellow;
+	padding-top: 100px;
+}
 
 
 
