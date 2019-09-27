@@ -9,12 +9,12 @@
 
 .linha {
   text-align: center;
-  padding-left: 25px;
+  padding-left: 30px;  
 }
 
 .icone {
-  padding-right: 35px;
-  padding-left: 35px;
+  padding-right: 30px;
+  padding-left: 30px;
   font-size: small;
   padding-top: 10px;
   font-weight:bold;
