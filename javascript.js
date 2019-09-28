@@ -105,5 +105,5 @@ function muda(response, sequencia) {
 	// Após ajustar o estado do LED, setta a página para recarregar em 1,5s, 
 	// para buscar novamente o estado do botão LED do servidor
 	// Este tempo pode ser necessário para que o estado se modifique no dispositivo remoto
-	setTimeout(function () { limpaECarregaTabela(); }, 5000);
+	setTimeout(function () { limpaECarregaTabela(); }, 2000);
 }
