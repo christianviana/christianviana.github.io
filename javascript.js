@@ -40,7 +40,7 @@ function criaInterruptor(dispo) {
 
 	var txtInterruptor = '<div class="col-xs- icone">';
 	
-	txtInterruptor += '<button class="btn btn-dark btn-circle botao ';
+	txtInterruptor += '<button class="btn btn-dark botao ';
 	// LED
 	if (dispo.LED == '1')
 		txtInterruptor += ' ledLigado ';
@@ -105,5 +105,5 @@ function muda(response, sequencia) {
 	// Após ajustar o estado do LED, setta a página para recarregar em 0,5s, 
 	// para buscar novamente o estado do botão LED do servidor
 	// Este tempo pode ser necessário para que o estado se modifique no dispositivo remoto
-	setTimeout(function () { limpaECarregaTabela(); }, 11500);
+	setTimeout(function () { limpaECarregaTabela(); }, 500);
 }
