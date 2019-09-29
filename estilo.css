@@ -63,11 +63,32 @@
 }
 
 .bola {
+	width: 40px;
+	height: 40px;
 	background-image: url(aqua-ball-green.jpg);
 	background-size: 10px;
 	background-repeat: no-repeat;
 	background-position: 23px 8px;
 }
+
+.bolaFundoVerde {
+	width: 40px;
+	height: 40px;
+	background-image: url(aqua-ball-green.jpg);
+	background-size: 10px;
+	background-repeat: no-repeat;
+	background-position: 20px 00px;
+}
+
+.bolaFundoVermelha {
+	width: 40px;
+	height: 40px;
+	background-image: url(aqua-ball-red.jpg);
+	background-size: 10px;
+	background-repeat: no-repeat;
+	background-position: 20px 00px;
+}
+
 
 /* Standard syntax */
 @keyframes animacaoPiscaLed {
