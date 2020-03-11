@@ -98,15 +98,17 @@ function criaInfoUmidade(dispo) {
 
 // Usa AJAX pra só recarregar o botão que mudou
 function muda(sequencia) {
-	$(`#EspButton_${sequencia}`).toggleClass('imgPiscando');
+
 	var urlParaMudar = pagLigaLed + "?" + sequencia;
 	$.ajax({
 		url: urlParaMudar, success: function (result) {
+			$(`#EspButton_${sequencia}`).toggleClass('imgPiscando');
 			// Aqui é onde devem ser feitas as mudanças via Ajax para refletir a mudança de estado do LED no componente Web que o representar
 			console.log(result);
 			var pagina = JSON.parse(result);
 			var qtd = pagina.Dispo.length;
-			if (qtd === 1) {
+			// Por segurança, só altera se o resultado tem apenas um dispositivo, e com o mesmo sequencial que foi enviado
+			if (qtd === 1 && sequencia === pagina.Dispo[0].SEQ) {
 				$(`#Botao_${sequencia}`).replaceWith(criaInterruptor(pagina.Dispo[0]));
 			}
 		}
