@@ -26,7 +26,8 @@
 	<div class="container">
 		<h3 class="titulo"> <i class="fas fa-fish"></i> Alimenta Peixe</h3>
 		<p>Faça aqui a programação de alimentação do seu peixe:</p>
-
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+			data-whatever="@mdo">Novo</button>
 		<div class="list-group">
 			<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 				<div class="d-flex w-100 justify-content-between align-items-center">
@@ -113,6 +114,48 @@
 				</div>
 			</a>
 		</div>
+		<button class="btn btn-primary" type="submit">Novo</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+			data-whatever="@mdo">Open modal for @mdo</button>
+		<button class="btn btn-primary" type="submit">Salvar</button>
+
+
+
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Nova refeição</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="recipient-name" class="col-form-label">Nome:</label>
+								<input type="text" class="form-control" id="recipient-name">
+							</div>
+							<div class="form-group">
+								<label for="message-text" class="col-form-label">Horário:</label>
+								<input type="time" class="form-control" id="message-text"></input>
+							</div>
+							<div class="form-group">
+								<label for="refeicao-qtd" class="col-form-label">Quantidade:</label>
+								<input type="number" class="form-control" id="refeicao-qtd"></input>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+								class="fas fa-trash"></i></button>
+						<button type="button" class="btn btn-primary"><i class="fas fa-check"></i>OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 	</div>
 
