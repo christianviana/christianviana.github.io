@@ -10,6 +10,7 @@ $(document).ready(function () {
 
 
 function limpaECarregaTabela() {
+	console.log(dataFormatada() + 'carregando dados...');
 	$.ajax({
 		url: paginaDeDados, success: function (result) {
 			$("#interruptoresRow").html("");
@@ -18,8 +19,13 @@ function limpaECarregaTabela() {
 			insereLinhas(result);
 		}, cache: false
 	});
+	console.log(dataFormatada() + 'OK!');
 }
 
+
+//function novoCiclo() {
+//	$("#interruptoresRow").append(criaInterruptor(pagina.Dispo[numLinha]));
+//}
 
 function insereLinhas(result) {
 
@@ -53,7 +59,7 @@ function criaInterruptor(dispo) {
 	if (dispo.LED == '1')
 		txtInterruptor += ' checked=true ';
 
-	txtInterruptor += `onclick="muda(${dispo.SEQ})">`;
+	txtInterruptor += `onclick="this.disabled=true;muda(${dispo.SEQ})">`;
 	txtInterruptor += '<span class="switch-left">I</span>';
 	txtInterruptor += '<span class="switch-right">O</span>';
 	txtInterruptor += '</label>	';
@@ -98,27 +104,37 @@ function criaInfoUmidade(dispo) {
 
 // Usa AJAX pra só recarregar o botão que mudou
 function muda(sequencia) {
-
+	console.log(dataFormatada() + 'clicou no botão de sequência ' + sequencia);
 	var urlParaMudar = pagLigaLed + "?" + sequencia;
+	$(`#EspButton_${sequencia}`).toggleClass('imgPiscando');
 	$.ajax({
 		url: urlParaMudar, success: function (result) {
-			$(`#EspButton_${sequencia}`).toggleClass('imgPiscando');
-			// Aqui é onde devem ser feitas as mudanças via Ajax para refletir a mudança de estado do LED no componente Web que o representar
-			console.log(result);
-			var pagina = JSON.parse(result);
-			var qtd = pagina.Dispo.length;
+			//$(`#EspButton_${sequencia}`).toggleClass('imgPiscando');
+			// Aqui é onde podem ser feitas as mudanças via Ajax para refletir a mudança de estado do LED no componente Web que o representar
+			console.log(dataFormatada() + 'resposta do clique no botão de sequência ' + sequencia + ': ' + result);
+			//var pagina = JSON.parse(result);
+			//var qtd = pagina.Dispo.length;
 			// Por segurança, só altera se o resultado tem apenas um dispositivo, e com o mesmo sequencial que foi enviado
-			if (qtd === 1 && sequencia === pagina.Dispo[0].SEQ) {
-				$(`#Botao_${sequencia}`).replaceWith(criaInterruptor(pagina.Dispo[0]));
-			}
+			//if (qtd === 1 && sequencia === pagina.Dispo[0].SEQ) {
+			//	$(`#Botao_${sequencia}`).replaceWith(criaInterruptor(pagina.Dispo[0]));
 		}
 	});
-
-
-	// Para melhor performance o ideal seria que o resultado da urlParaMudar trouxesse o novo estado do dispositivo que pediu para alterar
-
 	// Após ajustar o estado do LED, setta a página para recarregar em 0,5s, 
 	// para buscar novamente o estado do botão LED do servidor
 	// Este tempo pode ser necessário para que o estado se modifique no dispositivo remoto
-	//setTimeout(function () { limpaECarregaTabela(); }, 2000);
+	setTimeout(function () { limpaECarregaTabela(); }, 2000);
+}
+
+function dataFormatada() {
+	var d = new Date();
+	var retorno = completaZerosEsquerda(d.getHours()) + ':';
+	retorno += completaZerosEsquerda(d.getMinutes()) + ':';
+	retorno += completaZerosEsquerda(d.getSeconds()) + '.';
+	retorno += d.getMilliseconds();
+	retorno += ' -> ';
+	return retorno;
+}
+
+function completaZerosEsquerda(numero) {
+	return numero < 10 ? '0' + numero : numero;
 }
